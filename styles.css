@@ -1,63 +1,90 @@
-/* Reset general */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Fondo degradado */
+/* Estilos generales */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #83a4d4, #b6fbff);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #83a4d4, #b6fbff);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-/* Contenedor general */
 .container {
-    width: 100%;
-    max-width: 500px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Header */
-header {
-    text-align: center;
-    margin-bottom: 20px;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  text-align: center;
 }
 
 header h1 {
-    color: #ffffff;
-    font-size: 2.5em;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  font-size: 2.5em;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  margin-bottom: 20px;
 }
 
-/* Card (tarjeta) */
 .card {
-    background: white;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .card h2 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 1.5em;
+  color: #333;
+  font-size: 1.5em;
+  margin: 0;
 }
 
-/* Footer */
 footer {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 0.8em;
-    color: white;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  margin-top: 20px;
+  font-size: 0.8em;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
+
+/* Estilo y animación del widget Dialogflow CX */
+df-messenger {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+
+  --df-messenger-font-color: #000;
+  --df-messenger-font-family: 'Google Sans', sans-serif;
+  --df-messenger-chat-background: #f3f6fc;
+  --df-messenger-message-user-background: #1E90FF;
+  --df-messenger-message-bot-background: #ffffff;
+}
+
+body.loaded df-messenger {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+df-messenger::part(chat-button) {
+  animation: bounceIn 1.2s ease forwards;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
