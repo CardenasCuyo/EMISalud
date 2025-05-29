@@ -24,6 +24,9 @@
 
     <main class="card">
       <h2>¡Hola! ¿En qué podemos ayudarte?</h2>
+      <button onclick="reiniciarChatbot()" style="margin-top: 20px; padding: 10px 20px; font-size: 16px;">
+        🔄 Reiniciar conversación
+      </button>
     </main>
 
     <footer>
@@ -31,20 +34,37 @@
     </footer>
   </div>
 
-  <!-- Chatbot: Dialogflow CX -->
-  <df-messenger
-    project-id="emisalud-459219"
-    agent-id="36c00701-6432-405c-9551-fbb699041191"
-    language-code="es"
-    max-query-length="-1">
-    <df-messenger-chat-bubble
-      chat-title="EMISalud"
-      chat-icon="https://cdn-icons-png.flaticon.com/512/833/833472.png">
-    </df-messenger-chat-bubble>
-  </df-messenger>
+  <!-- Contenedor del chatbot -->
+  <div id="chatbot-container"></div>
 
-  <!-- Activar animación al cargar -->
+  <!-- Script para generar y reiniciar el chatbot -->
   <script>
+    function crearChatbot() {
+      const sessionId = 'sess_' + Date.now();
+      const container = document.getElementById('chatbot-container');
+      container.innerHTML = ''; // Limpia el contenido anterior
+
+      const df = document.createElement('df-messenger');
+      df.setAttribute('project-id', 'emisalud-459219');
+      df.setAttribute('agent-id', '36c00701-6432-405c-9551-fbb699041191');
+      df.setAttribute('language-code', 'es');
+      df.setAttribute('session-id', sessionId);
+      df.setAttribute('max-query-length', '-1');
+
+      const bubble = document.createElement('df-messenger-chat-bubble');
+      bubble.setAttribute('chat-title', 'EMISalud');
+      bubble.setAttribute('chat-icon', 'https://cdn-icons-png.flaticon.com/512/833/833472.png');
+
+      df.appendChild(bubble);
+      container.appendChild(df);
+    }
+
+    function reiniciarChatbot() {
+      crearChatbot(); // Regenera el chatbot con una nueva sesión
+    }
+
+    window.addEventListener('DOMContentLoaded', crearChatbot);
+
     window.addEventListener('load', () => {
       document.body.classList.add('loaded');
     });
